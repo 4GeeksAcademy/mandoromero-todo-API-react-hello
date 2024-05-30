@@ -1,26 +1,37 @@
-import React from "react";
+import { createContext, useContext } from "react";
+import { ContextExclusionPlugin, HotModuleReplacementPlugin } from "webpack";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+const Home = createContext()
 
-//create your first component
-const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
-};
+export const TodoProvider = ({children}) => {
+    const [todos, setTodos] = useState ([])
 
-export default Home;
+    const addTodo = (text) => {
+        const newTodo = {text, completed: false}
+        setTodos ([...todos, newTodo])
+    }
+    const toggleTodo = (index) => {
+        const newTodo = todo.map((todo, i)) => {
+            if (i === index) {
+                return {...todo, completed: !todo.completed, completedAt: !todo.completed : 
+                    !todo.completed ? new Date().toISOString( ) : null}
+            }
+            return todo
+        })
+        setTodos(newTodos)
+    }
+    return (
+        <todoContext.provider value= {{todos, addTodo, toggleTodo}}>
+            {children}
+        </todoContext.provider>
+    )
+export const TodoProvider = ({children}) => {
+
+}   
+export const useTodo = () = {
+    const context = useContext(todoContext)
+    return context
+    )
+}
+
+export default Home
